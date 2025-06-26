@@ -1,0 +1,119 @@
+// Taylor Swift-Themed Portfolio Website
+// Built with React + TailwindCSS (suitable for deployment with Vercel/Netlify)
+
+import React from "react";
+
+export default function PortfolioSite() {
+  return (
+    <main className="font-sans bg-gradient-to-b from-pink-100 to-white text-gray-800">
+      {/* Landing Section */}
+      <section className="min-h-screen flex flex-col justify-center items-center text-center p-10 bg-gradient-to-b from-pink-200 to-teal-100">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          Hi, I’m [Your Name]
+        </h1>
+        <p className="text-xl md:text-2xl max-w-2xl mb-6">
+          I build products with clarity, creativity, and calm — like Taylor builds albums: bold, layered, and unforgettable.
+        </p>
+        <div className="flex gap-4">
+          <button className="bg-pink-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-pink-600 transition">
+            🎤 View My Projects
+          </button>
+          <button className="bg-teal-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-teal-600 transition">
+            💼 Get My Resume
+          </button>
+          <button className="bg-purple-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-purple-700 transition">
+            🌟 Let’s Talk
+          </button>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 px-10 bg-pink-50">
+        <h2 className="text-4xl font-bold mb-6">About Me – The Calm in the Chaos</h2>
+        <p className="text-lg max-w-3xl">
+          A product manager, a storyteller, a competitive soul with a calming presence — that’s me.
+        </p>
+        <ul className="mt-6 space-y-2">
+          <li>🧠 Strategist with 3+ years in Gen AI and SaaS</li>
+          <li>🎨 Artist who paints, writes, and binge-watches with intention</li>
+          <li>🧭 Leader who moves fast but stays grounded</li>
+          <li>💬 Speaker who loves self-improvement and deep conversations</li>
+          <li>🧩 Problem-solver who finds patterns in messes — and joy in clarity</li>
+        </ul>
+        <p className="italic mt-6">“The best people in life are free.” — Taylor Swift</p>
+      </section>
+
+      {/* Projects Section */}
+      <section className="py-20 px-10 bg-gray-900 text-white">
+        <h2 className="text-4xl font-bold mb-10">Projects – My Eras</h2>
+        <div className="grid md:grid-cols-2 gap-10">
+          {/* Project 1 */}
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
+            <h3 className="text-2xl font-semibold mb-2">FinCoPilot – The AI Accountant 💀</h3>
+            <p className="mb-2">AI-powered accounting intelligence</p>
+            <ul className="list-disc ml-5 text-sm space-y-1">
+              <li>Reduced manual reconciliation time by 60%</li>
+              <li>92% accuracy in invoice summaries</li>
+              <li>Prompt guards improved trust across queries</li>
+            </ul>
+            <button className="mt-4 bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600">
+              🔍 Read Case Study
+            </button>
+          </div>
+
+          {/* Project 2 */}
+          <div className="bg-red-700 p-6 rounded-2xl shadow-lg">
+            <h3 className="text-2xl font-semibold mb-2">Dev Stream Labs – AI DevOps 🔥</h3>
+            <p className="mb-2">AI-Driven DevOps automation</p>
+            <ul className="list-disc ml-5 text-sm space-y-1">
+              <li>3x faster build success</li>
+              <li>Downtime reduced by 50%</li>
+              <li>AI agent handled 40% of bug triage</li>
+            </ul>
+            <button className="mt-4 bg-yellow-500 px-4 py-2 rounded text-white hover:bg-yellow-600">
+              🔍 Read Case Study
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-20 px-10 bg-blue-100">
+        <h2 className="text-4xl font-bold mb-6">Skills & Tools – My 1989 Era</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+          <span className="bg-white rounded-xl p-4 shadow">Roadmapping</span>
+          <span className="bg-white rounded-xl p-4 shadow">Figma</span>
+          <span className="bg-white rounded-xl p-4 shadow">Prompt Design</span>
+          <span className="bg-white rounded-xl p-4 shadow">N8N</span>
+          <span className="bg-white rounded-xl p-4 shadow">LangChain</span>
+          <span className="bg-white rounded-xl p-4 shadow">GTM Strategy</span>
+        </div>
+      </section>
+
+      {/* Creative Corner */}
+      <section className="py-20 px-10 bg-green-50">
+        <h2 className="text-4xl font-bold mb-6">Creative Corner – Folklore</h2>
+        <p className="text-lg mb-4">Where logic meets poetry.</p>
+        <ul className="list-disc ml-5 space-y-2">
+          <li>🖌️ A rotating gallery of my paintings</li>
+          <li>📖 A blog: Show Reviews & Self-Growth Stories</li>
+          <li>📝 Leadership Lessons from Taylor Swift</li>
+        </ul>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 px-10 bg-indigo-950 text-white">
+        <h2 className="text-4xl font-bold mb-6">Contact Me – Midnights Era</h2>
+        <form className="space-y-4 max-w-md">
+          <input className="w-full p-3 rounded bg-indigo-800 placeholder-white" placeholder="Name" />
+          <input className="w-full p-3 rounded bg-indigo-800 placeholder-white" placeholder="Email" />
+          <textarea className="w-full p-3 rounded bg-indigo-800 placeholder-white" rows={4} placeholder="Message" />
+          <button className="bg-white text-indigo-900 px-6 py-2 rounded hover:bg-gray-100">
+            ✨ Send Me a Note
+          </button>
+        </form>
+        <p className="italic mt-6">“I polish up real nice.”</p>
+      </section>
+    </main>
+  );
+}
