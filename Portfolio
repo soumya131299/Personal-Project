@@ -1,153 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF‑8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Taylor Swift</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: #333;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      background: #fff;
-      z-index: 100;
-    }
-    header img { height: 40px; }
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: 600;
-      color: #333;
-    }
-    .hero {
-      background: url('your‑hero‑image.jpg') center/cover no-repeat;
-      height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 4rem;
-      margin: 0;
-    }
-    .hero p {
-      font-size: 1.2rem;
-    }
-    .music {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .music h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-    }
-    .album-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .album {
-      position: relative;
-    }
-    .album img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .album .title {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      color: #fff;
-      background: rgba(0,0,0,0.5);
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    footer {
-      background: #f8f8f8;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    footer nav a {
-      margin: 0 10px;
-      color: #666;
-      font-size: 0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Show</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-pink: #d63384;
+            --gold: #ffd700;
+            --navy: #1e3a8a;
+            --slate: #475569;
+            --cream: #fef7ed;
+            --crimson: #dc2626;
+            --lavender: #c084fc;
+            --blush: #fca5a5;
+            --glitter: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--slate);
+            background: linear-gradient(135deg, var(--cream) 0%, #fef3c7 50%, var(--cream) 100%);
+            overflow-x: hidden;
+        }
+
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(45deg, var(--deep-pink), var(--crimson));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--deep-pink);
+            color: white;
+        }
+
+        .about {
+            background: var(--cream);
+            padding: 6rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--navy);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--slate);
+        }
+
+        .confession {
+            background: var(--lavender);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .confession::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .confession h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .projects {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+            color: white;
+            padding: 6rem 0;
+        }
+
+        .projects h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--gold);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-era {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .journal {
+            background: var(--cream);
+            padding: 6rem 0;
+        }
+
+        .journal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            color: var(--navy);
+            margin-bottom: 4rem;
+        }
+
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .journal-post {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .journal-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .easter-eggs {
+            background: linear-gradient(45deg, var(--deep-pink), var(--lavender));
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .easter-eggs h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .random-thought {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        .random-btn {
+            padding: 1rem 2rem;
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .random-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .contact {
+            background: var(--navy);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            background: var(--deep-pink);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav { position: static; justify-content: center; margin-bottom: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="logo‑placeholder.png" alt="Taylor Swift Logo">
-    <nav>
-      <a href="#news">News</a>
-      <a href="#music">Music</a>
-      <a href="#tour">Tour</a>
-      <a href="#store">Store</a>
-      <a href="#media">Media</a>
-      <a href="#contact">Contact</a>
+    <div class="spotlight"></div>
+    
+    <nav class="nav">
+        <button class="nav-btn active" onclick="showSection('hero')">Home</button>
+        <button class="nav-btn" onclick="showSection('about')">About</button>
+        <button class="nav-btn" onclick="showSection('projects')">Projects</button>
+        <button class="nav-btn" onclick="showSection('journal')">Journal</button>
+        <button class="nav-btn" onclick="showSection('easter-eggs')">Chaos</button>
+        <button class="nav-btn" onclick="showSection('contact')">Contact</button>
     </nav>
-  </header>
 
-  <section class="hero">
-    <div>
-      <h1>TAYLOR SWIFT</h1>
-      <p>New Era, New Music, Coming Soon</p>
-      <button onclick="alert('Pre‑order now!')">Pre‑Order</button>
-    </div>
-  </section>
+    <section id="hero" class="section hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm [Your Name]</h1>
+                <p>I question everything, and sometimes I stare directly into your soul (👀). Welcome to my mess—I mean, site. I build delightful, chaotic, and data-smart products that solve real problems. Also: I paint, write, binge shows, and occasionally outshine Siri. ✨</p>
+                <p style="font-size: 1.2rem; margin-bottom: 3rem;">Ready? Step into my world.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="showSection('projects')">→ See My Work</button>
+                    <button class="btn btn-secondary" onclick="showSection('about')">→ Meet the Mess-Maker</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="music" class="music">
-    <h2>Featured Albums</h2>
-    <div class="album-grid">
-      <div class="album">
-        <img src="album1.jpg" alt="Album 1">
-        <div class="title">Album One</div>
-      </div>
-      <div class="album">
-        <img src="album2.jpg" alt="Album 2">
-        <div class="title">Album Two</div>
-      </div>
-      <div class="album">
-        <img src="album3.jpg" alt="Album 3">
-        <div class="title">Album Three</div>
-      </div>
-    </div>
-  </section>
+    <section id="about" class="section about hidden">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text fade-in">
+                    <h2>Monologues & Moonshots</h2>
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--deep-pink); margin-bottom: 1rem;">The Origin Story</h3>
+                    <p>Once a curious kid who couldn't stop thinking. Now a Product Manager who won't stop building.</p>
+                    
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--deep-pink); margin: 2rem 0 1rem;">What I'm Made Of</h3>
+                    <p>• Builder of agentic AI, onboarding systems, and chaotic MVPs<br>
+                    • Competitive in the most endearing way possible<br>
+                    • Leadership style? Calm fire.</p>
+                </div>
+                <div class="fade-in">
+                    <div class="confession">
+                        <h3>Fleabag Moment (Honest Confession)</h3>
+                        <p>I once built a feature no one used. Then I learned to listen better. That changed everything.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>© 2025 Taylor Swift. All rights reserved.</p>
-    <nav>
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#terms">Terms of Use</a>
-    </nav>
-  </footer>
+    <section id="projects" class="section projects hidden">
+        <div class="container">
+            <h2>Eras Tour: Product Edition</h2>
+            <div class="project-grid">
+                <div class="project-card fade-in">
+                    <div class="project-era">The FinTech Folklore</div>
+                    <h3 class="project-title">FinCoPilot</h3>
+                    <p>AI-powered AR module that made accounting sexy. Almost.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        <strong>The Problem:</strong> Accounting was boring<br>
+                        <strong>The Solution:</strong> Made it slightly less boring<br>
+                        <strong>The Unexpected:</strong> Users actually enjoyed it
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-era">The MVP Diaries</div>
+                    <h3 class="project-title">Automation Magic</h3>
+                    <p>Built fast, broke nothing. Automated magic with N8N + Notion.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        <strong>The Problem:</strong> Manual chaos everywhere<br>
+                        <strong>The Solution:</strong> Workflows that actually work<br>
+                        <strong>The Unexpected:</strong> It saved 20 hours/week
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-era">Midnights & Metrics</div>
+                    <h3 class="project-title">Growth Dashboard</h3>
+                    <p>Turned user chaos into clarity. DAU up 34%.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        <strong>The Problem:</strong> Data was everywhere and nowhere<br>
+                        <strong>The Solution:</strong> One dashboard to rule them all<br>
+                        <strong>The Unexpected:</strong> Teams started making better decisions
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-era">The AI Renaissance</div>
+                    <h3 class="project-title">Agent Soumya</h3>
+                    <p>An agent that can introduce me better than I can.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        <strong>The Problem:</strong> I'm bad at talking about myself<br>
+                        <strong>The Solution:</strong> Made AI do it for me<br>
+                        <strong>The Unexpected:</strong> It's actually pretty good at it
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-era">Paint Outside the Lines</div>
+                    <h3 class="project-title">Creative Chaos</h3>
+                    <p>A visual journey through randomness, color, and control.</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        <strong>The Problem:</strong> Needed creative outlet<br>
+                        <strong>The Solution:</strong> Paint, pixels, and pixels of paint<br>
+                        <strong>The Unexpected:</strong> It keeps me sane
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Example simple fade‑in on scroll
-    document.addEventListener('scroll', () => {
-      document.querySelectorAll('.album').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.85) {
-          el.style.transition = 'opacity 0.6s ease-out';
-          el.style.opacity = 1;
+    <section id="journal" class="section journal hidden">
+        <div class="container">
+            <h2>The Swiftian Dispatch</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: var(--slate);">Data meets diary. Thought pieces + quirky reflections.</p>
+            <div class="journal-grid">
+                <div class="journal-post fade-in">
+                    <h3 style="color: var(--deep-pink); margin-bottom: 1rem;">What Taylor Swift Taught Me About Product Launches</h3>
+                    <p>Every era needs its own narrative, its own aesthetic, its own carefully crafted chaos...</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--slate);">5 min read • Product Strategy</div>
+                </div>
+                
+                <div class="journal-post fade-in">
+                    <h3 style="color: var(--deep-pink); margin-bottom: 1rem;">Mrs. Maisel's Guide to Presentations That Pop</h3>
+                    <p>Confidence isn't about knowing everything. It's about owning your story...</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--slate);">7 min read • Leadership</div>
+                </div>
+                
+                <div class="journal-post fade-in">
+                    <h3 style="color: var(--deep-pink); margin-bottom: 1rem;">The Day I Realized I Was Building for Me, Not Users (Oops)</h3>
+                    <p>Sometimes the most beautiful features are the ones nobody asked for...</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--slate);">4 min read • Product Lessons</div>
+                </div>
+                
+                <div class="journal-post fade-in">
+                    <h3 style="color: var(--deep-pink); margin-bottom: 1rem;">Building an AI Agent That Actually Gets Me</h3>
+                    <p>Teaching a machine to understand human chaos is harder than it sounds...</p>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--slate);">6 min read • AI & Tech</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="easter-eggs" class="section easter-eggs hidden">
+        <div class="container">
+            <h2>Chaos, Curated</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Let them see your soul—like Fleabag breaking the fourth wall.</p>
+            
+            <div class="random-thought">
+                <p id="random-text" style="font-size: 1.3rem; font-style: italic;">
+                    "Building products is like writing jokes—the timing has to be perfect, and if you have to explain it, it's probably not working."
+                </p>
+            </div>
+            
+            <button class="random-btn" onclick="getRandomThought()">Tap for a Thought</button>
+            
+            <div style="margin-top: 4rem;">
+                <h3 style="font-family: 'Caveat', cursive; font-size: 2rem; margin-bottom: 2rem;">If I Weren't a PM...</h3>
+                <p style="font-size: 1.2rem;">Comedian? Pop critic? Poet laureate? Professional overthinker? The possibilities are endless and equally chaotic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact hidden">
+        <div class="container">
+            <h2>Let's Make Magic</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem;">If you're into building bold things with wild hearts—let's talk.</p>
+            
+            <div class="contact-links">
+                <a href="mailto:hello@yourdomain.com" class="contact-link">📮 Email</a>
+                <a href="#" class="contact-link">🐦 Twitter</a>
+                <a href="#" class="contact-link">💼 LinkedIn</a>
+                <a href="#" class="contact-link">🎨 Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Spotlight effect
+        document.addEventListener('mousemove', (e) => {
+            const spotlight = document.querySelector('.spotlight');
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            spotlight.style.setProperty('--x', x + '%');
+            spotlight.style.setProperty('--y', y + '%');
+        });
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Trigger animations
+            setTimeout(() => {
+                const elements = document.querySelectorAll(`#${sectionId} .fade-in`);
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 200);
+                });
+            }, 100);
         }
-      });
-    });
-    // Initialize album opacity
-    document.querySelectorAll('.album').forEach(el => el.style.opacity = '0');
-  </script>
+
+        // Random thoughts
+        const thoughts = [
+            "Building products is like writing jokes—the timing has to be perfect, and if you have to explain it, it's probably not working.",
+            "I once spent three hours perfecting a button hover effect that literally no one will notice. Worth it.",
+            "The best features are the ones users don't know they need until they can't live without them.",
+            "Every bug is just a feature waiting for the right context.",
+            "I measure success in 'wow' moments per user session.",
+            "Sometimes the most elegant solution is the one that breaks all the rules.",
+            "User feedback is like dating advice—everyone has opinions, but only some actually matter.",
+            "The day I stopped trying to build the perfect product and started building the right one, everything changed.",
+            "Chaos isn't the opposite of order—it's the raw material for creating something beautiful.",
+            "I believe in building products that feel like magic, even when the code behind them is held together with digital duct tape."
+        ];
+
+        function getRandomThought() {
+            const randomIndex = Math.floor(Math.random() * thoughts.length);
+            const thoughtEl = document.getElementById('random-text');
+            thoughtEl.style.opacity = '0';
+            
+            setTimeout(() => {
+                thoughtEl.textContent = thoughts[randomIndex];
+                thoughtEl.style.opacity = '1';
+            }, 300);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show hero section by default
+            const heroElements = document.querySelectorAll('#hero .fade-in');
+            heroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 200);
+            });
+        });
+
+        // Smooth scrolling for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-10px)';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
