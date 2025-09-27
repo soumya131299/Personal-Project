@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JobMap Agent</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 12px; width: 320px; }
+      label { display: block; margin-top: 8px; font-weight: 600; }
+      input, button { width: 100%; box-sizing: border-box; padding: 8px; margin-top: 4px; }
+      small { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h3>JobMap Agent</h3>
+    <label>Server URL</label>
+    <input id="server" value="http://localhost:8000" />
+    <small>Start: uvicorn jobmap.server:app --host 127.0.0.1 --port 8000</small>
+
+    <label>Query</label>
+    <input id="query" placeholder="e.g. software engineer" />
+
+    <label>Location (optional)</label>
+    <input id="location" placeholder="e.g. San Francisco Bay Area" />
+
+    <label>Max results</label>
+    <input id="max" type="number" min="1" max="100" value="50" />
+
+    <button id="run">Generate Map</button>
+    <div id="status"></div>
+
+    <script src="popup.js"></script>
+  </body>
+  </html>
+
