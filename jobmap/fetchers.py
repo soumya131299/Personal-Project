@@ -1,4 +1,4 @@
-THIS SHOULD BE A LINTER ERRORfrom __future__ import annotations
+from __future__ import annotations
 
 import csv
 from datetime import datetime
