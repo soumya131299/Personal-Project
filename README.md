@@ -40,6 +40,20 @@ This produces:
 python -m jobmap.cli --help
 ```
 
+### Run the local server (for the Chrome extension)
+```bash
+uvicorn jobmap.server:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Then open `http://127.0.0.1:8000/` to verify, and the extension can call:
+- POST `/api/fetch-map` with JSON: `{ "query": "software engineer", "location": "San Francisco", "max_results": 50 }`
+- The server serves artifacts under `/outputs` (e.g., `/outputs/map.html`).
+
+### Chrome Extension (MV3)
+1. Start the server as above.
+2. In Chrome, go to Extensions → Manage Extensions → Enable Developer mode → Load unpacked → select the `extension` folder.
+3. Click the extension icon, set Server URL (default `http://localhost:8000`), enter query/location, click Generate Map.
+
 ### Development
 ```bash
 python -m jobmap.cli fetch-and-map --query "data engineer" --location "New York, NY" --out-dir outputs
