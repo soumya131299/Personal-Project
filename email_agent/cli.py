@@ -1,7 +1,6 @@
 import csv
 import os
 import sys
-from dataclasses import asdict
 from typing import List
 
 try:
@@ -12,6 +11,7 @@ except Exception:  # ImportError or any failure
 
 from .extractors import extract_from_parts
 from .imap_client import fetch_luma_emails
+from .agent import Agent, load_account_from_env
 
 
 def main() -> int:
@@ -23,6 +23,38 @@ def main() -> int:
 	limit_env = os.getenv("IMAP_LIMIT")
 	limit = int(limit_env) if limit_env else None
 	outfile = os.getenv("OUTPUT_CSV", "luma_contacts.csv")
+
+	# Background agent mode (set AGENT_RUN=1). Runs once if AGENT_ONCE is set.
+	if os.getenv("AGENT_RUN"):
+		for var, name in [(imap_host, "IMAP_HOST"), (imap_user, "IMAP_USER"), (imap_pass, "IMAP_PASS")]:
+			if not var:
+				print(f"Missing required environment variable: {name}", file=sys.stderr)
+				return 2
+		storage_dir = os.getenv("AGENT_STORAGE_DIR", "./data")
+		agent = Agent(storage_dir)
+		account = load_account_from_env()
+		if os.getenv("AGENT_ONCE"):
+			agent.run_once(account)
+			return 0
+		else:
+			agent.run_loop(account)
+			return 0
+
+	# Background agent mode (set AGENT_RUN=1). Runs once if AGENT_ONCE is set.
+	if os.getenv("AGENT_RUN"):
+		for var, name in [(imap_host, "IMAP_HOST"), (imap_user, "IMAP_USER"), (imap_pass, "IMAP_PASS")]:
+			if not var:
+				print(f"Missing required environment variable: {name}", file=sys.stderr)
+				return 2
+		storage_dir = os.getenv("AGENT_STORAGE_DIR", "./data")
+		agent = Agent(storage_dir)
+		account = load_account_from_env()
+		if os.getenv("AGENT_ONCE"):
+			agent.run_once(account)
+			return 0
+		else:
+			agent.run_loop(account)
+			return 0
 
 	for var, name in [(imap_host, "IMAP_HOST"), (imap_user, "IMAP_USER"), (imap_pass, "IMAP_PASS")]:
 		if not var:
@@ -52,5 +84,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-\tsys.exit(main())
+	sys.exit(main())
 
