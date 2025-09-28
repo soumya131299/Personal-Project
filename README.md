@@ -1,6 +1,6 @@
 ## Luma Email Agent
 
-Fetch Luma-related emails from IMAP, extract LinkedIn URLs and phone numbers, and export to CSV.
+Fetch Luma-related emails from IMAP, extract LinkedIn URLs and phone numbers, and export to CSV. Also includes a background agent to fetch and store raw emails incrementally.
 
 ### Setup
 
@@ -22,6 +22,28 @@ python -m email_agent.cli
 ```
 
 This writes `luma_contacts.csv` with columns: `date, from, subject, linkedin_urls, phone_numbers`.
+
+### Background agent
+
+Set env vars and run in once or loop mode:
+
+```bash
+# required
+export IMAP_HOST=imap.example.com
+export IMAP_USER=user@example.com
+export IMAP_PASS=app_password
+
+# optional
+export IMAP_MAILBOX=INBOX
+export AGENT_STORAGE_DIR=./data
+export AGENT_POLL_SECONDS=300
+
+# run once
+AGENT_RUN=1 AGENT_ONCE=1 python -m email_agent.cli
+
+# run loop (background via nohup)
+nohup env AGENT_RUN=1 python -m email_agent.cli >/tmp/email_agent.log 2>&1 &
+```
 
 ### What counts as Luma email
 
