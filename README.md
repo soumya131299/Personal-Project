@@ -1,35 +1,77 @@
-## Luma Email Agent
+## Presence Matching API
 
-Fetch Luma-related emails from IMAP, extract LinkedIn URLs and phone numbers, and export to CSV.
+Matches founders to VCs by sectors, stages, geography, backgrounds/thesis, and portfolio signals. Returns a percent match with a transparent breakdown.
 
-### Setup
-
-1. Create a `.env` from `.env.example` and fill in credentials.
-2. If you can, create a virtualenv and install deps:
+### Quickstart
 
 ```bash
-python3 -m venv .venv
-. .venv/bin/activate
+python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-If your environment blocks venv, you can use system Python and pass `--break-system-packages` when installing, or use pipx.
+If your system lacks `venv`, install it (Debian/Ubuntu): `sudo apt install python3-venv`.
 
-### Run
+### Endpoints
 
-```bash
-python -m email_agent.cli
+- GET `/founders` — sample founders
+- GET `/vcs` — sample VCs
+- GET `/match/founder/{founder_id}?top_k=5` — rank matches for a seeded founder
+- POST `/match` — submit a custom founder profile
+
+### POST /match example
+
+```json
+{
+  "founder": {
+    "id": "custom_1",
+    "name": "You",
+    "hometown_city": "Austin",
+    "hometown_country": "USA",
+    "background": ["ex-Stripe PM", "Fintech"],
+    "bio": "Building embedded lending infrastructure",
+    "sectors": ["fintech", "b2b", "infrastructure"],
+    "stages": ["pre-seed", "seed"]
+  },
+  "top_k": 3
+}
 ```
 
-This writes `luma_contacts.csv` with columns: `date, from, subject, linkedin_urls, phone_numbers`.
+### Sample response
 
-### What counts as Luma email
+```json
+{
+  "founder_id": "custom_1",
+  "matches": [
+    {
+      "founder_id": "custom_1",
+      "vc_id": "vc_101",
+      "score_percent": 82.5,
+      "breakdown": {
+        "sectors": 0.67,
+        "stages": 1.0,
+        "geography": 1.0,
+        "background_thesis": 0.44,
+        "portfolio": 0.5
+      }
+    }
+  ]
+}
+```
 
-The agent looks for messages where the `From` address contains `luma` or the subject/body includes keywords like `luma`, `rsvp`, `event`, or `ticket`.
+### Weights
+
+Defaults (sum to 1.0):
+- sectors: 0.35
+- stages: 0.20
+- geography: 0.15
+- background_thesis: 0.15
+- portfolio: 0.15
+
+To customize, extend the `/match` request to accept weight overrides.
 
 ### Notes
-
-- LinkedIn: Extracts personal, company, and event links.
-- Phones: Extracts international-like formats; filters to at least 10 digits.
-- For Gmail IMAP, enable IMAP and use an app password if 2FA is enabled.
+- Background/thesis uses cosine similarity over simple bag-of-words with stopwords removed.
+- Geography matches exact city/country or treats `global` as a partial match.
+- Portfolio signal uses sector overlap across portfolio companies.
 
