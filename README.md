@@ -18,6 +18,9 @@ If your system lacks `venv`, install it (Debian/Ubuntu): `sudo apt install pytho
 - GET `/vcs` — sample VCs
 - GET `/match/founder/{founder_id}?top_k=5` — rank matches for a seeded founder
 - POST `/match` — submit a custom founder profile
+\- POST `/auth/signup` — create a user (username, email, password)
+\- POST `/auth/login` — get a Bearer token
+\- GET `/auth/me` — get current user (send `Authorization: Bearer <token>`) 
 
 ### POST /match example
 
